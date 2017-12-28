@@ -1,0 +1,39 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/user' a='index'}>">用户管理</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
+<div class="row">
+    <p class="text-right"><a href="<{url c='admin/user' a='form'}>">增加新用户</a></p>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>用户名</th>
+                <th>角色</th>
+                <th>文章数</th>
+                <th>创建时间</th>
+                <th>上次登录时间</th>
+                <th>操作</th>
+            </tr>
+            <{foreach $users as $user}>
+            <tr>
+                <td><{$user@iteration}></td>
+                <td><{$user.username}></td>
+                <td><{foreach $roles as $role}>
+                    <{if $role.role_id == $user.role_id}><{$role.rolename}><{/if}>
+                    <{/foreach}>
+                </td>
+                <td><{$user.articles}></td>
+                <td><{date("Y-m-d H:i:s", $user.created)}></td>
+                <td><{if $user.last_login != 0}><{date("Y-m-d H:i:s", $user.last_login)}><{/if}></td>
+                <td>
+                    <a href="<{url c='admin/user' a='form' user_id=$user.user_id}>">编辑</a>&nbsp;&nbsp;
+                    <a href="<{url c='admin/user' a='del' user_id=$user.user_id randstr=$randstr}>" onclick="return confirm('确认删除用户<{$user.username}>')">删除</a>
+                </td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </div>
+</div>

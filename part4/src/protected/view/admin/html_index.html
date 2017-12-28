@@ -1,0 +1,48 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li class="active">HTML生成</li>
+    </ol>
+</div>
+<div class="row">
+    <div class="col-md-3 text-center">
+        <p><button type="button" class="btn btn-success btn-lg" id="start_btn"<{if $disabled}> disabled="disabled" <{/if}>>开始重新生成全站HTML</button></p>
+        <p><br /></p>
+        <p><a href="<{url c='admin/html' a='clear'}>" class="btn btn-warning btn-lg" role="button" onclick="return confirm('请确认是否要清理全部HTML文件？\n\n重新生成HTML并不需要清理的，只有完全不需要HTML了才清理！\n');">清理全部HTML文件</a></p>
+    </div>
+    <div class="col-md-9">
+        <div class="panel panel-info">
+            <div class="panel-heading">生成HTML进度：</div>
+            <div class="panel-body" id="process">
+                <{if $disabled}> 当前站点已经关闭HTML生成功能！ <br /><br />请在配置文件中将“htmlmakeup”设置成随机字符串来开启。<{/if}>
+            </div>
+        </div>
+    </div>
+</div>
+<script type="text/javascript">
+    $(document).ready(function(){
+        $("#start_btn").click(function(){
+            $(this).attr("disabled", "true");
+            $(this).text("正在初始化请稍候...");
+            $("#process").html("");
+            $.get("<{url c='admin/html' a='start'}>", function (data) {
+                if(data == "true"){
+                    $("#start_btn").text("正在生成HTML请稍候...");
+                    makedo();
+                }
+            });
+        });
+    });
+    function makedo(){
+        $.get("<{url c='admin/html' a='do'}>", function (result) {
+            if(result == "true"){
+                not_finished = false;
+                $("#process").prepend("<p><strong>HTML生成完成!</strong></p>");
+                $("#start_btn").removeAttr("disabled");
+                $("#start_btn").text("开始重新生成全站HTML");
+            }else{
+                $("#process").prepend(result);
+                makedo();
+            }
+        })
+    }
+</script>

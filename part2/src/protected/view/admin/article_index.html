@@ -1,0 +1,64 @@
+<div class="row">
+	<ol class="breadcrumb">
+		<li><a href="#">文章管理</a></li>
+		<li class="active">列表</li>
+	</ol>
+</div>
+<div class="row">
+	<p class="text-right"><a href="<{url c='admin/article' a='add'}>">发布新文章</a></p>
+	<div class="col-md-12">
+		<table class="table">
+			<tr>
+				<th>#</th>
+				<th>文章标题</th>
+				<th>分类</th>
+				<th>作者</th>
+				<th>发布时间</th>
+				<th>更新时间</th>
+				<th>操作</th>
+			</tr>
+			<{if $articles}>
+				<{foreach $articles as $article}>
+				<tr>
+					<td><{$article.article_id}></td>
+					<td><a href="<{url c='main' a='view' article_id=$article.article_id}>" target="_blank"><{$article.title}></a></td>
+					<td>
+						<{foreach $categorys as $cat}>
+						<{if $cat.category_id == $article.category_id}>
+						<a href="<{url c='main' a='list' category_id=$article.category_id}>" target="_blank"><{$cat.category_name}></a>
+						<{/if}>
+						<{/foreach}>
+					</td>
+					<td><{$article.username}></td>
+					<td><{date("Y-m-d H:i:s", $article.created)}></td>
+					<td><{date("Y-m-d H:i:s", $article.updated)}></td>
+					<td><a href="<{url c='admin/article' a='edit' article_id=$article.article_id}>">修改</a>&nbsp;&nbsp;&nbsp;&nbsp;
+						<a href="<{url c='admin/article' a='del' article_id=$article.article_id randstr=$randstr}>">删除</a>
+					</td>
+				</tr>
+				<{/foreach}>
+			<{else}>
+				<tr><td colspan="7">暂无文章</td></tr>
+			<{/if}>
+		</table>
+        <{if $pager}>
+		<div class="row text-center">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li>
+						<a href="<{url c='admin/article' a='index' p=$pager.prev_page}>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+					</li>
+                    <{foreach $pager.all_pages as $p}>
+                        <li<{if $p == $pager.current_page}> class="active"<{/if}>>
+                        <a href="<{url c='admin/article' a='index' p=$p}>"><{$p}></a>
+                        </li>
+                    <{/foreach}>
+					<li>
+						<a href="<{url c='admin/article' a='index' p=$pager.next_page}>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+        <{/if}>
+	</div>
+</div>

@@ -1,0 +1,57 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/user' a='index'}>">用户管理</a></li>
+        <{if !empty($info)}>
+        <li class="active">编辑用户信息：<{$info.username}></li>
+        <{else}>
+        <li class="active">新增用户</li>
+        <{/if}>
+    </ol>
+</div>
+<div class="row">
+    <{if !empty($info)}>
+    <form class="form-horizontal" action="<{url c='admin/user' a='edit'}>" method="post">
+        <input type="hidden" name="user_id" value="<{$info.user_id}>">
+     <{else}>
+     <form class="form-horizontal" action="<{url c='admin/user' a='add'}>" method="post">
+     <{/if}>
+        <div class="form-group">
+            <label for="inputUsername" class="col-sm-2 control-label">用户名</label>
+            <div class="col-sm-6">
+                <input type="text" name="username" class="form-control" id="inputUsername" placeholder="用户名" <{if !empty($info)}> value="<{$info.username}>" disabled="disabled" readonly<{/if}>>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword" class="col-sm-2 control-label">用户密码</label>
+            <div class="col-sm-6">
+                <input type="password" name="userpass" class="form-control" id="inputPassword">
+                <p class="text-danger">如不修改密码，请留空。</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputPassword2" class="col-sm-2 control-label">重新输入密码</label>
+            <div class="col-sm-6">
+                <input type="password" name="userpass2" class="form-control" id="inputPassword2">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRole" class="col-sm-2 control-label">角色</label>
+            <div class="col-sm-6">
+                <select class="form-control" id="inputRole" name="role_id">
+                    <{foreach $roles as $role}>
+                        <{if !empty($info)}>
+                            <option value="<{$role.role_id}>"<{if $info.role_id == $role.role_id}> selected<{/if}>><{$role.rolename}></option>
+                        <{else}>
+                            <option value="<{$role.role_id}>"><{$role.rolename}></option>
+                        <{/if}>
+                    <{/foreach}>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+</div>

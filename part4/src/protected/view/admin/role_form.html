@@ -1,0 +1,55 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/role' a='index'}>">角色管理</a></li>
+        <{if !empty($info)}>
+        <li class="active">编辑角色：<{$info.rolename}></li>
+        <{else}>
+        <li class="active">增加新角色</li>
+        <{/if}>
+    </ol>
+</div>
+<div class="row">
+    <form class="form-horizontal" action="<{url c='admin/role' a='form'}>" method="post">
+        <{if !empty($info)}>
+        <input type="hidden" name="role_id" value="<{$info.role_id}>">
+        <{/if}>
+        <div class="form-group">
+            <label for="inputRole" class="col-sm-2 control-label">角色名称</label>
+            <div class="col-sm-6">
+                <input type="text" name="rolename" value="<{if !empty($info)}><{$info.rolename}><{/if}>" class="form-control" id="inputRole" placeholder="角色名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputRole" class="col-sm-2 control-label">设置角色对应权限</label>
+            <div class="col-sm-6">
+                <table class="table table-bordered">
+                    <tr>
+                        <th>选择</th>
+                        <th>模块</th>
+                        <th>控制器</th>
+                        <th>方法</th>
+                    </tr>
+                    <{foreach $acls as $acl}>
+                    <tr>
+                        <td><input type="checkbox" value="<{$acl.acl_id}>" name="acl_ids[]"
+                        <{foreach $role_acls as $role_acl}>
+                            <{if $role_acl.acl_id == $acl.acl_id}>
+                                 checked <{break}>
+                            <{/if}>
+                            <{/foreach}>
+                        ></td>
+                        <td><{$acl.module_name}>（<{$acl.acl_module}>）</td>
+                        <td><{$acl.controller_name}>（<{$acl.acl_controller}>）</td>
+                        <td><{$acl.action_name}>（<{$acl.acl_action}>）</td>
+                    </tr>
+                    <{/foreach}>
+                </table>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+</div>

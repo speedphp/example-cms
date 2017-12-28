@@ -1,0 +1,22 @@
+<div class="row">
+	<ol class="breadcrumb">
+		<li><a href="<{url c='admin/article' a='index'}>">文章管理</a></li>
+		<li><a href="<{url c='admin/img' a='index'}>">图片管理</a></li>
+		<li class="active">图集</li>
+	</ol>
+</div>
+<div class="row">
+	<{foreach $imgs as $img}>
+	<div class="col-sm-6 col-md-4">
+		<div class="thumbnail">
+			<img src="<{$img.upload_path}>">
+			<div class="caption">
+				<p><{if $img.article}>
+					<a href="<{url c='main' a='view' article_id=$img.article.article_id}>" target="_blank"><{$img.article.title}></a>
+					<{/if}>
+					<a href="<{url c='admin/img' a='del' img_id=$img.img_id randstr=$randstr}>" class="pull-right" onclick="return confirm('确认删除？')"><span aria-hidden="true">&times;</span></a></p>
+			</div>
+		</div>
+	</div>
+	<{/foreach}>
+</div>

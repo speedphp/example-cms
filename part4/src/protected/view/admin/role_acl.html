@@ -1,0 +1,35 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/role' a='index'}>">角色管理</a></li>
+        <li><a href="<{url c='admin/role' a='acl'}>">权限配置</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
+<div class="row">
+    <p class="text-right"><a href="<{url c='admin/role' a='aclform'}>">增加新权限</a></p>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>模块标题</th>
+                <th>控制器名</th>
+                <th>方法名</th>
+                <th>是否菜单项</th>
+                <th>操作</th>
+            </tr>
+            <{foreach $acls as $acl}>
+            <tr>
+                <td><{$acl@iteration}></td>
+                <td><{$acl.module_name}>（<{$acl.acl_module}>）</td>
+                <td><{$acl.controller_name}>（<{$acl.acl_controller}>）</td>
+                <td><{$acl.action_name}>（<{$acl.acl_action}>）</td>
+                <td><{if $acl.is_menu}>是<{/if}></td>
+                <td>
+                    <a href="<{url c='admin/role' a='aclform' acl_id=$acl.acl_id}>">编辑</a>&nbsp;&nbsp;
+                    <a href="<{url c='admin/role' a='acldel' acl_id=$acl.acl_id randstr=$randstr}>" onclick="return confirm('确认删除？那么对应权限任何人无法进入了。')">删除</a>
+                </td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </div>
+</div>

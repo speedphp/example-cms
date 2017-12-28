@@ -1,0 +1,36 @@
+<div class="row">
+	<h2 class="text-center"><{$title}></h2>
+	<ol class="breadcrumb">
+		<li><a href="<{url c='main' a='index'}>">主页</a></li>
+		<li>
+			<{foreach $categorys as $cat}>
+			<{if $cat.category_id == $article.category_id}>
+			<a href="<{url c='main' a='list' category_id=$cat.category_id}>"><{$cat.category_name}></a></li>
+			<{/if}>
+			<{/foreach}>
+		<li class="active"><{$title}></li>
+	</ol>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<{$article.contents nofilter}>
+		<div class="clearfix"></div>
+		<p class="text-right">分类：
+			<{foreach $categorys as $cat}>
+			<{if $cat.category_id == $article.category_id}>
+			<a href="<{url c='main' a='list' category_id=$cat.category_id}>"><{$cat.category_name}></a></li>
+			<{/if}>
+			<{/foreach}>
+		</p>
+		<p class="text-right">发布于：<{date("Y-m-d H:i:s", $article.created)}></p>
+	</div>
+	<div class="col-md-4">
+		<div class="list-group">
+			<a href="<{url c='main' a='index'}>" class="list-group-item active">主页</a>
+			<{foreach $categorys as $cat}>
+			<a href="<{url c='main' a='list' category_id=$cat.category_id}>" class="list-group-item"><{$cat.category_name}><span class="badge"><{$cat.articles}></span></a>
+			<{/foreach}>
+			<a href="<{url c='login' a='index'}>" class="list-group-item">登录管理</a>
+		</div>
+	</div>
+</div>

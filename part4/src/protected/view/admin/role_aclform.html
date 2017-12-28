@@ -1,0 +1,54 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/role' a='index'}>">角色管理</a></li>
+        <li><a href="<{url c='admin/role' a='acl'}>">权限配置</a></li>
+        <{if !empty($info)}>
+        <li class="active">编辑权限：<{$info.acl_id}></li>
+        <{else}>
+        <li class="active">增加新权限</li>
+        <{/if}>
+    </ol>
+</div>
+<div class="row">
+    <form class="form-horizontal" action="<{url c='admin/role' a='aclform'}>" method="post">
+        <{if !empty($info)}>
+        <input type="hidden" name="acl_id" value="<{$info.acl_id}>">
+        <{/if}>
+        <div class="form-group">
+            <label for="inputModule" class="col-sm-2 control-label">模块标题</label>
+            <div class="col-sm-6">
+                <input type="text" name="module_name" value="<{if !empty($info)}><{$info.module_name}><{/if}>" class="form-control" id="inputModule" placeholder="模块标题">
+                <input type="text" name="acl_module" value="<{if !empty($info)}><{$info.acl_module}><{else}>default<{/if}>" class="form-control" id="inputModuleE" placeholder="模块英文名称">
+                <p class="help-block">可不填，不填则对应默认module。</p>
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputController" class="col-sm-2 control-label">控制器名</label>
+            <div class="col-sm-6">
+                <input type="text" name="controller_name" value="<{if !empty($info)}><{$info.controller_name}><{/if}>" class="form-control" id="inputController" placeholder="控制器名">
+                <input type="text" name="acl_controller" value="<{if !empty($info)}><{$info.acl_controller}><{/if}>" class="form-control" id="inputControllerE"
+                       placeholder="控制器英文名称">
+            </div>
+        </div>
+        <div class="form-group">
+            <label for="inputAction" class="col-sm-2 control-label">方法名</label>
+            <div class="col-sm-6">
+                <input type="text" name="action_name" value="<{if !empty($info)}><{$info.action_name}><{else}>*<{/if}>" class="form-control" id="inputAction" placeholder="方法名">
+                <input type="text" name="acl_action" value="<{if !empty($info)}><{$info.acl_action}><{else}>*<{/if}>" class="form-control" id="inputActionE" placeholder="方法英文名称">
+                <p class="help-block">可填&nbsp;<strong>*</strong>，对应该控制器下全部方法。</p>
+            </div>
+        </div>
+        <div class="checkbox">
+            <div class="col-sm-offset-2 col-sm-2">
+                <input type="checkbox" name="is_menu" <{if !empty($info) && 1 == $info.is_menu}>checked<{/if}>> 是否菜单项
+                <input type="text" name="menu_sort" value="<{if !empty($info)}><{$info.menu_sort}><{/if}>" class="form-control" id="checkboxE" placeholder="菜单项排序">
+            </div>
+        </div>
+        <p class="clearfix">&nbsp;<br></p>
+        <div class="form-group">
+            <div class="col-sm-offset-2 col-sm-8">
+                <button type="submit" class="btn btn-default">提交</button>
+            </div>
+        </div>
+    </form>
+</div>

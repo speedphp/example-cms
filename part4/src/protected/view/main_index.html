@@ -1,0 +1,57 @@
+<div class="row">
+	<h2 class="text-center"><{$title}></h2>
+	<ol class="breadcrumb">
+		<li class="active"><a href="<{url c='main' a='index'}>">主页</a></li>
+	</ol>
+</div>
+<div class="row">
+	<div class="col-md-8">
+		<{if $articles}>
+			<{foreach $articles as $article}>
+			<p class="lead"><a href="<{url c='main' a='view' article_id=$article.article_id}>"><{$article.title}></a></p>
+			<blockquote>
+			<p><footer>分类：
+				<{foreach $categorys as $cat}>
+				<{if $cat.category_id == $article.category_id}>
+				<a href="<{url c='main' a='list' category_id=$article.category_id}>"><{$cat.category_name}></a>
+				<{/if}>
+				<{/foreach}>
+				</footer></p>
+			<p><footer>发布于：<{date("Y-m-d H:i:s", $article.created)}></footer></p>
+			</blockquote>
+			<hr>
+			<{/foreach}>
+		<{else}>
+			<div class="well well-lg">暂无文章</div>
+		<{/if}>
+		<div class="clearfix"></div>
+		<{if $pager}>
+		<div class="row text-center">
+			<nav aria-label="Page navigation">
+				<ul class="pagination">
+					<li>
+						<a href="<{url c='main' a='index' p=$pager.prev_page}>" aria-label="Previous"><span aria-hidden="true">&laquo;</span></a>
+					</li>
+					<{foreach $pager.all_pages as $p}>
+					<li<{if $p == $pager.current_page}> class="active"<{/if}>>
+					<a href="<{url c='main' a='index' p=$p}>"><{$p}></a>
+					</li>
+					<{/foreach}>
+					<li>
+						<a href="<{url c='main' a='index' p=$pager.next_page}>" aria-label="Next"><span aria-hidden="true">&raquo;</span></a>
+					</li>
+				</ul>
+			</nav>
+		</div>
+		<{/if}>
+	</div>
+	<div class="col-md-4">
+		<div class="list-group">
+			<a href="<{url c='main' a='index'}>" class="list-group-item active">主页</a>
+			<{foreach $categorys as $cat}>
+			<a href="<{url c='main' a='list' category_id=$cat.category_id}>" class="list-group-item"><{$cat.category_name}><span class="badge"><{$cat.articles}></span></a>
+			<{/foreach}>
+			<a href="<{url c='login' a='index'}>" class="list-group-item">登录管理</a>
+		</div>
+	</div>
+</div>

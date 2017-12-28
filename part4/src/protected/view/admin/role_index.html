@@ -1,0 +1,32 @@
+<div class="row">
+    <ol class="breadcrumb">
+        <li><a href="<{url c='admin/role' a='index'}>">角色管理</a></li>
+        <li class="active">列表</li>
+    </ol>
+</div>
+<div class="row">
+    <p class="text-right"><a href="<{url c='admin/role' a='acl'}>">权限配置</a>&nbsp;&nbsp;&nbsp;&nbsp;<a href="<{url c='admin/role' a='form'}>">增加新角色</a></p>
+    <div class="col-md-12">
+        <table class="table">
+            <tr>
+                <th>#</th>
+                <th>角色名</th>
+                <th>权限</th>
+                <th>操作</th>
+            </tr>
+            <{foreach $roles as $role}>
+            <tr>
+                <td><{$role@iteration}></td>
+                <td><{$role.rolename}></td>
+                <td><{foreach $role.acls as $acl}>
+                    <{$acl}>&nbsp;&nbsp;
+                    <{if $acl@index % 3 == 2}><br/><{/if}>
+                <{/foreach}></td>
+                <td>
+                    <a href="<{url c='admin/role' a='form' role_id=$role.role_id}>">编辑</a>
+                </td>
+            </tr>
+            <{/foreach}>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,39 @@
+<div class="row">
+	<ol class="breadcrumb">
+		<li><a href="<{url c='admin/article' a='index'}>">文章管理</a></li>
+		<li><a href="<{url c='admin/template' a='index'}>">模板</a></li>
+		<li class="active">列表</li>
+	</ol>
+</div>
+<div class="row">
+	<p class="text-right"><a href="<{url c='admin/template' a='form'}>">增加新模板</a></p>
+	<div class="col-md-12">
+		<table class="table">
+			<tr>
+				<th>#</th>
+				<th>类型</th>
+				<th>模板名</th>
+				<th>文件名</th>
+				<th>创建</th>
+				<th>修改</th>
+				<th>操作</th>
+			</tr>
+			<{foreach $templates as $t}>
+			<tr>
+				<td><{$t@iteration}></td>
+				<td><{foreach $template_type as $type => $typename}>
+					<{if $t.template_type == $type}><{$typename}><{/if}>
+				<{/foreach}></td>
+				<td><{$t.template_name}></td>
+				<td><{$t.filename}></td>
+				<td><{$t.create_username}>（<{$t.created}>）</td>
+				<td><{$t.create_username}>（<{$t.created}>）</td>
+				<td>
+					<a href="<{url c='admin/template' a='form' template_id=$t.template_id}>">编辑</a>&nbsp;&nbsp;&nbsp;&nbsp;
+					<a href="<{url c='admin/template' a='del' template_id=$t.template_id randstr=$randstr}>" onclick="return confirm('确认删除？')">删除</a>
+				</td>
+			</tr>
+			<{/foreach}>
+		</table>
+	</div>
+</div>

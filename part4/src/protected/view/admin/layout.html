@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+<meta charset="utf-8">
+<title><{$layout_title}></title>
+<link href="/i/css/bootstrap.min.css" rel="stylesheet">
+<script src="/i/js/jquery.min.js"></script>
+<script src="/i/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="/i/xheditor/xheditor-1.2.2.min.js"></script>
+<script type="text/javascript" src="/i/xheditor/zh-cn.js"></script>
+</head>
+<body>
+<nav class="navbar navbar-default">
+	<div class="container">
+		<div class="navbar-header">
+			<a class="navbar-brand" href="#"><{$layout_title}></a>
+		</div>
+		<div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+			<ul class="nav navbar-nav">
+				<{foreach $layout_menus as $layout_m}>
+				<{$mlayout_action = ($layout_m["acl_action"]=="*") ? "index" : $layout_m["acl_action"]}>
+				<li><a href="<{url($layout_m['acl_module'].'/'.$layout_m['acl_controller'], $mlayout_action)}>"><{$layout_m["controller_name"]}></a></li>
+				<{/foreach}>
+			</ul>
+			<ul class="nav navbar-nav navbar-right">
+				<li><a href="#"><{$layout_username}></a></li>
+				<li><a href="<{url c='login' a='logout'}>">退出登录</a></li>
+			</ul>
+		</div>
+	</div>
+</nav>
+<div class="container">
+<{include file=$__template_file}>
+</div>
+</body>
+</html>
