@@ -26,7 +26,7 @@ return array(
     'htmlmakeup' => false,
 
     'manager' => array(
-        'jake',
+        'admin',
     ),
 	'upload' => array(
 		'path' => "/upload",

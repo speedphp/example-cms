@@ -18,7 +18,7 @@ $config = array(
     'htmlmakeup' => 'test',
 
     'manager' => array(
-        'jake',
+        'admin',
     ),
 );
 
