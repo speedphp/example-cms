@@ -37,7 +37,7 @@ class UserController extends BaseController {
 							$role_id = ($roleObj->checkRoleIdExists(arg("role_id"))) ? arg("role_id") : 2;
 							$newrow = array(
 									"username" => $username,
-									"userpass" => md5($username + $salt + $userpass),
+									"userpass" => md5($username . $salt . $userpass),
 									"salt" => $salt,
 									"role_id" => $role_id,
 									"articles" => 0,
@@ -81,7 +81,7 @@ class UserController extends BaseController {
 						$salt = substr(uniqid(), 0, 10);
 						$role_id = ($roleObj->checkRoleIdExists(arg("role_id"))) ? arg("role_id") : 2;
 						$newrow = array(
-							"userpass" => md5($info["username"] + $salt + $userpass),
+							"userpass" => md5($info["username"] . $salt . $userpass),
 							"salt" => $salt,
 							"role_id" => $role_id,
 						);

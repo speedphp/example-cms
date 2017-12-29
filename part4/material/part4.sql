@@ -110,5 +110,5 @@ CREATE TABLE `user` (
   PRIMARY KEY (`user_id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=utf8;
 
-INSERT INTO `user` VALUES ('1', 'admin', '3ad3eb6695d1443bdd674db109b5866f', '5a459cd16c', '1', '0', '1514511569', '0');
+INSERT INTO `user` VALUES ('1', 'admin', 'f457188ab0766deec19fc0cfcad6707b', '5a45d7c882', '1', '0', '1514511569', '0');
 

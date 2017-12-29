@@ -22,7 +22,7 @@ class User extends Model {
 	public function check($user, $pass) {
 		$info = $this->find(array("username" => $user));
 		if ($info) {
-			$inputpass = md5($info["username"] + $info["salt"] + $pass);
+			$inputpass = md5($info["username"] . $info["salt"] . $pass);
 			if($inputpass == $info["userpass"]){
 				return true;
 			}
