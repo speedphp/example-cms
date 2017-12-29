@@ -5,7 +5,8 @@ class User extends Model {
 
 	// 检查用户名是否存在
 	public function checkExists($user) {
-		return !empty($this->find(array("username" => $user)));
+		$result = $this->find(array("username" => $user));
+		return !empty($result);
 	}
 
 	// 检查用户是否管理员

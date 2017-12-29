@@ -4,12 +4,14 @@ class Role extends Model {
 
 	// 检查角色ID是否存在
 	public function checkRoleIdExists($role_id){
-		return !empty($this->find(array("role_id" => $role_id)));
+		$result = $this->find(array("role_id" => $role_id));
+		return !empty($result);
 	}
 
 	// 检查角色名是否存在
 	public function checkRoleNameExists($rolename){
-		return !empty($this->find(array("rolename" => $rolename)));
+		$result = $this->find(array("rolename" => $rolename));
+		return !empty($result);
 	}
 
 	// 取角色对应的菜单
