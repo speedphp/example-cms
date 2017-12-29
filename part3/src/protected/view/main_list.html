@@ -47,7 +47,7 @@
 			<a href="<{url c='main' a='index'}>" class="list-group-item">主页</a>
 			<{foreach $categorys as $cat}>
 			<a href="<{url c='main' a='list' category_id=$cat.category_id}>" class="list-group-item
-				<{if $category.category_id = $cat.category_id}> active<{/if}>
+				<{if $category.category_id == $cat.category_id}> active<{/if}>
 				"><{$cat.category_name}><span class="badge"><{$cat.articles}></span></a>
 			<{/foreach}>
 			<a href="<{url c='login' a='index'}>" class="list-group-item">登录管理</a>
