@@ -61,7 +61,7 @@ class UserController extends BaseController {
 		}else{
 			$msg = "请输入用户名";
 		}
-		$this->tips($msg, url("admin/user", "add"));
+		$this->tips($msg, url("admin/user", "form"));
 	}
 
 	// 编辑用户信息
