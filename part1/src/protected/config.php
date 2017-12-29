@@ -14,7 +14,7 @@ $config = array(
 		'admin/<c>-<a>'      => 'admin/<c>/<a>',
 	),
     'user' => array(
-        'jake' => '123456',
+        'admin' => '123456',
     ),
 );
 

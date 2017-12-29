@@ -18,7 +18,7 @@ $config = array(
     'htmlmakeup' => 'test',
 
     'user' => array(
-        'jake' => '123456',
+        'admin' => '123456',
     ),
 );
 
