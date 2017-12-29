@@ -138,10 +138,12 @@ class ArticleController extends BaseController {
     function actionUpimg() {
 		$localName = ""; $err = ""; $msg = "''";
 		$tempPath = APP_DIR . $GLOBALS["upload"]["path"]."/".date("YmdHis").mt_rand(10000,99999).'.tmp';
-		// fixed php5.6 some bug
-		if((substr(phpversion(), 0, 3) != "5.6") && isset($_SERVER['HTTP_CONTENT_DISPOSITION']) && preg_match('/attachment;\s+name="(.+?)";\s+filename="(.+?)"/i',$_SERVER['HTTP_CONTENT_DISPOSITION'],$info)){
+
+		// 如果是php5.6出现“PHP Deprecated:  Automatically populating $HTTP_RAW_POST_DATA is deprecated”的问题
+		// 请在php.ini内设置always_populate_raw_post_data = -1
+		if(isset($_SERVER['HTTP_CONTENT_DISPOSITION']) && preg_match('/attachment;\s+name="(.+?)";\s+filename="(.+?)"/i',$_SERVER['HTTP_CONTENT_DISPOSITION'],$info)){
 			//HTML5上传
-			file_put_contents($tempPath,file_get_contents("php://input"));
+			file_put_contents($tempPath, file_get_contents("php://input"));
 			$localName = urldecode($info[2]);
 		}else{//标准表单式上传
 			$upfile = @$_FILES['filedata'];
