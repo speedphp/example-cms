@@ -33,7 +33,7 @@ class CategoryController extends BaseController {
         if ($category_id && $category_name) {
             $cat_info = $categoryObj->find(array("category_id" => $category_id));
             if ($cat_info) {
-                $categoryObj->update(array("category_id" => $category_id), array("category_name" => $category_name, "template_id" => arg("template_id", "")));
+                $categoryObj->update(array("category_id" => $category_id), array("category_name" => $category_name, "template_id" => arg("template_id", 0)));
                 $this->tips("已修改分类", url("admin/category", "index"));
             }else{
                 $this->tips("无此分类", url("admin/category", "index"));
@@ -42,7 +42,7 @@ class CategoryController extends BaseController {
         if ($category_name) {
             $categoryObj->create(array(
             	"category_name" => $category_name,
-				"template_id" => arg("template_id", "")
+				"template_id" => arg("template_id", 0)
 			));
             $this->tips("成功增加分类", url("admin/category", "index"));
         } else {
