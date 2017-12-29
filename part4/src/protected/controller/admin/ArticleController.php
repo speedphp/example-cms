@@ -101,7 +101,7 @@ class ArticleController extends BaseController {
                 "title" => $title,
                 "contents" => $contents,
                 "updated" => time(),
-				"template_id" => arg("template_id", "")
+				"template_id" => arg("template_id", 0)
             );
             $articleObj->update(array("article_id" => $article["article_id"]), $newrow);
 			$this->setImg($article["article_id"]);
@@ -115,7 +115,7 @@ class ArticleController extends BaseController {
 				"contents" => $contents,
 				"created" => time(),
 				"updated" => time(),
-				"template_id" => arg("template_id", "")
+				"template_id" => arg("template_id", 0)
 			));
 			$this->setImg($article_id);
             $categoryObj->incr(array("category_id" => $category["category_id"]), "articles", 1);

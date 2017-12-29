@@ -39,7 +39,7 @@
             <label for="selectTemplate" class="col-sm-2 control-label">模板选择</label>
             <div class="col-sm-6">
                 <select name="template_id" class="form-control" id="selectTemplate">
-                    <option value=""></option>
+                    <option value="0"></option>
                     <{foreach $templates as $t}>
                         <option value="<{$t.template_id}>" <{if !empty($info) && $info.template_id == $t.template_id}> selected<{/if}>><{$t.template_name}></option>
                     <{/foreach}>
