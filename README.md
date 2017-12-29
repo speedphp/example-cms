@@ -5,7 +5,7 @@
 
 ### 有不明白的地方怎么办？
 
-- 到本程序专用疑难问答帖子查阅和提问：[http://www.speedphp.com/thread-5101-1-1.html](http://www.speedphp.com/thread-5101-1-1.html)
+- 到本程序专用疑难问答帖子查阅和提问：[http://www.speedphp.com/thread-5102-1-1.html](http://www.speedphp.com/thread-5102-1-1.html)
 - 代码相应的教程在制作中，敬请期待。
 
 ### 功能
