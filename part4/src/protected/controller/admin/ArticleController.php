@@ -138,7 +138,8 @@ class ArticleController extends BaseController {
     function actionUpimg() {
 		$localName = ""; $err = ""; $msg = "''";
 		$tempPath = APP_DIR . $GLOBALS["upload"]["path"]."/".date("YmdHis").mt_rand(10000,99999).'.tmp';
-		if(isset($_SERVER['HTTP_CONTENT_DISPOSITION']) && preg_match('/attachment;\s+name="(.+?)";\s+filename="(.+?)"/i',$_SERVER['HTTP_CONTENT_DISPOSITION'],$info)){
+		// fixed php5.6 some bug
+		if((substr(phpversion(), 0, 3) != "5.6") && isset($_SERVER['HTTP_CONTENT_DISPOSITION']) && preg_match('/attachment;\s+name="(.+?)";\s+filename="(.+?)"/i',$_SERVER['HTTP_CONTENT_DISPOSITION'],$info)){
 			//HTML5上传
 			file_put_contents($tempPath,file_get_contents("php://input"));
 			$localName = urldecode($info[2]);
